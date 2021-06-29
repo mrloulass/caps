@@ -34,6 +34,8 @@ Major functionality for this phase of the project.
 
 ![CAPS Event Driven Applications](./assets/events.png)
 
+![CAPS Event Driven Applications](./assets/events2.png)
+
 ## Links
 
 []()
