@@ -4,6 +4,8 @@
 
 const events = require('./events.js');
 
+const order = require('./vendor.js');
+
 // listen for the event
 require('./vendor.js');
 require('./driver.js');
@@ -12,24 +14,48 @@ require('./driver.js');
 // Logs every event to the console with a timestamp and the event payload
 // i.e. "EVENT {}"
 
+// const faker = require('faker');
+
+// let randomName = faker.name.findName();
+// let randomStore = faker.company.companyName();
+// let randomOrderId = faker.finance.account();
+// let randomAddress = faker.address.streetAddress();
+
+// let currentTimeStamp = new Date();
+
+// const order = {
+//   event: 'pickup',
+//   time: currentTimeStamp,
+//   payload: 
+//   {
+//     store: randomStore,
+//     orderID: randomOrderId,
+//     customer: randomName,
+//     address: randomAddress,
+//   }
+// }
+
 events.on('pickup', pickup);
 events.on('inTransit', inTransit);
 events.on('delivered', delivered);
 
 
-let currentTimeStamp = (new Date()).getDate();
 
-function pickup(payload){
-  console.log(currentTimeStamp);
-  events.emit('pickup', {pickup:currentTimeStamp})
+function pickup(payload) {
+  console.log(payload)
+  setTimeout(()=>{
+  console.log('DRIVER:pick up', order.payload.orderID);
+  },1000);
 };
-function inTransit(payload){
-  console.log(currentTimeStamp);
-  events.emit('inTransit', {inTransit:currentTimeStamp})
+
+function inTransit(payload) {
+    console.log(payload)
 };
-function delivered(payload){
-  console.log(currentTimeStamp);
-  events.emit('delivered', {delivered:currentTimeStamp})
-  
+
+function delivered(payload) {
+  events.emit('delivered', payload)
+  console.log(payload)
+  console.log('thank you');
 };
+
 
