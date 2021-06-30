@@ -1,19 +1,36 @@
 'use strict';
 
-require('dotenv').config;
+// 1st send emit pickup
+// 2nd listen on delivry
 
+// require('dotenv').config;
 
 const events = require('./events.js');
 
-const STORE_NAME = process.env.STORE_NAME || 'Hello Flowers';
+const faker = require('faker');
+
+let randomName = faker.name.findName();
+let randomStore = faker.company.companyName();
+let randomOrderId = faker.finance.account();
+let randomAddress = faker.address.streetAddress();
+
+let currentTimeStamp = new Date();
 
 const order = {
-  storeName:STORE_NAME,
-  orderId:'e3669048-7313-427b-b6cc-74010ca1f8f0',
-  customerName:'Mike Haul',
-  address: 'Seattle, WA',
+  event: 'pickup',
+  time: currentTimeStamp,
+  payload: 
+  {
+    store: randomStore,
+    orderID: randomOrderId,
+    customer: randomName,
+    address: randomAddress,
+  }
 }
 
-setInterval(()=>{
-  console.log(order);
-},5000);
+setInterval(() => {
+  events.emit('pickup', {EVENT:order});
+}, 5000);
+
+
+module.exports = order;

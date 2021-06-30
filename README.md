@@ -25,10 +25,10 @@ Major functionality for this phase of the project.
 - As a developer, I want to create an event driven system so that I can write code that happens in response to events, in real time
 
 #### ENV Requirements
-<-- Anything that people have to add to the .env on their machine goes here -->
+
 
 #### Running the App
-<-- List how to run the app here -->
+
 
 ## UML
 
