@@ -25,3 +25,4 @@ socket.on('pickup', (payload) => {
     socket.emit('delivered', payload);
   }, 3000)
 });
+

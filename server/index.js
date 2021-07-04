@@ -2,6 +2,9 @@
 
 require('dotenv').config;
 
+const MessageQueue = require ('../queue-server/index.js');
+const messages = new MessageQueue('messages');
+
 // 1st to setup socket.io
 const io = require('socket.io');
 
@@ -20,7 +23,32 @@ const caps = server.of('/caps');
 caps.on('connection', (socket) => {
 
   // proof socket is connected
-  console.log('Socket is Connected :' + socket.id );
+  console.log('Socket is Connected :' + socket.id);
+
+  socket.on('new message', payload => {
+
+    try {
+      let message = messages.add(payload);
+      socket.emit('added');
+      caps.emit('message', {
+        id: message.id,
+        payload: message.value
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  socket.on('getall',()=>{
+    let allMessages = messages.getAll();
+    allMessages.forEach(message =>{
+      socket.emit('message', message);
+    });
+  });
+
+  socket.on('received', message =>{
+    messages.received(message.id);
+  });
 
   socket.on('pickup', (payload) => {
     console.log('EVENT :', payload)
@@ -33,7 +61,7 @@ caps.on('connection', (socket) => {
     console.log('EVENT :', payload);
     socket.broadcast.emit('inTransit', payload)
   });
-  
+
   socket.on('delivered', (payload) => {
     console.log('EVENT :', payload);
     socket.broadcast.emit('delivered', payload)
