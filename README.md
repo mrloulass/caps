@@ -67,6 +67,8 @@ The core functionality we’ve already built remains the same. The difference in
 
 #### Running the App
 
+- folders: server, vendor and driver
+
 - use node in terminal to run console.logs 
 
 ## UML
@@ -74,5 +76,41 @@ The core functionality we’ve already built remains the same. The difference in
 ![Socket.io image](./assets/socket.io.png)
 
 ![Socket.io image](./assets/socket.io2.png)
+
+## Links
+
+## Phase 3 Requirements: Message Queues
+
+  - In phase 3, we’re going to implement a "queue" system so that nothing gets lost. Every event sent will be logged and held onto by the server until the intended recipient acknowledges that they received the message. A subscriber can get all of the messages they might have missed.
+
+### Setup
+
+The core functionality we’ll be building out the queue itself, getting our vendors subscribed to it, and focusing on just one event - delivered to set the pattern for subscribing to, and working with queues.
+
+- As a vendor, I want to “subscribe” to “delivered” notifications so that I know when my packages are delivered
+
+- As a vendor, I want to “catch up” on any “delivered” notifications that I might have missed so that I can see a complete log
+
+- As a driver, I want to “subscribe” to “pickup” notifications so that I know what packages to deliver
+
+- As a driver, I want to “catch up” on any “pickup” notifications I may have missed so that I can deliver everything
+
+- As a driver, I want a way to “scan” a delivery so that the vendors know when a package has been delivered
+
+#### ENV Requirements
+
+- none
+
+#### Running the App
+
+- folder: queue-server
+
+- use node in terminal to run console.logs 
+
+## UML
+
+![Message Queue image](./assets/queue1.png)
+
+![Message Queue image](./assets/queue2.png)
 
 ## Links
